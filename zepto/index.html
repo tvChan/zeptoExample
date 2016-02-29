@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/zepto.min.js" ></script><!--
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>-->
+	</head>
+	<body>
+		<ul>
+			<li>list item 1</li>
+			<li>list item 2</li>
+			<li>list item 3</li>
+		</ul>
+		<p>tv is tired</p>
+		<script type="text/javascript">
+			Zepto('li:first-child').add('p').css('background-color','red');
+			Zepto('li:nth-child(2)').after('<p>ttt</p>');
+			/*append在ul内部最后面添加*/
+			Zepto('ul').append('<li>new list item</li>');
+			Zepto('<li>da</li>').appendTo('ul')
+			/* Zepto.js
+			 	$.each(['a','b','c'],function(index,item){
+				console.log('item %d is : %s',index,item);
+			})
+			*/
+			/* JQuery
+			 * $(['a','b','c']).each(function(index,item){
+				console.log('item %d is : %s',index,item);
+			});*/
+			//$.grep(items,function(item){...})-->获取一新数组，新数组中包含返回ture的元素
+			console.log(Zepto.grep([1,2,3],function(item){
+				return item>1;
+			}));	//--->[2,3]
+			//$.inArray(element,array,[fromIndex])-->number搜索数组中指定值并返回它的索引(无则返回-1)
+			Zepto.inArray('abc',['bcd','abc','edf','aaa']);//-->1
+			Zepto.inArray('abc',['abc','dbc','adf'],1);//-->-1从index为1的位置向后查找
+			Zepto.inArray('abc',['bcd','abc','dfg'],1);//-->1
+			//$.isArray(object)-->boolean 如果object是Array就返回true
+			console.log("isArray "+Zepto.isArray(['a','b']));
+			//$.isFunction(object)-->boolean 如object是Function就返回true
+			//$.isPlainObject(object)-->boolean 如object是纯粹的对象(通过{}或new Object创建的)，如是则返回true
+			//$.isWindow(object)-->boolean 确定参数是否为一个窗口(window对象)，是则返回true...   p.s.:在处理iframe时非常有用，因为每个iframe都有自己的window对象，使用常规方法obj==window校验这些objects时会失败
+			//$.map(collection,function(item,index){...})-->collection通过遍历集合中的元素，返回一个新数组，null和undefined将被过滤掉
+			console.log(Zepto.map([1,2,3,4,5],function(item,index){
+				if(item>1){return item*item;}
+			}));
+			console.log(Zepto.map({'yao':1,'tai':2,'yang':3},function(item,index){
+				if(item>1){return item*item;}
+			}));
+			Zepto.map([1,2,3,'tv'], function(item,index) {
+				if(item>0){
+					console.log("index "+index+" item "+item);
+				}
+			});
+			//$.parseJSON(string)-->object 类似本地JSON.parse，接受一个标准格式的JSON字符串，并返回解释后的js对象
+			/*console.log(Zepto.parseJSON({'tvhaohao':1}));*/
+			//$.trim(string)-->string 删除字符串开始和末尾的空白符，类似String.prototype.trim()
+			console.log(Zepto.trim("    j j k l "));//-->"j j k l"
+			//$.type(object)-->string 获取js对象的类型，可能类型有：null,undefined,string,boolean,number,function,date,array,regexp,object,error
+			
+			
+		</script>
+	</body>
+</html>
