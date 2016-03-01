@@ -3,27 +3,33 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<script type="text/javascript" src="js/zepto.min.js" ></script><!--
+		<script type="text/javascript" src="js/zepto.js" ></script><!--
 		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>-->
 	</head>
 	<body>
 		<ul>
-			<li>list item 1</li>
+			<li data-role = "tvvv">list item 1</li>
 			<li>list item 2</li>
 			<li>list item 3</li>
+			<p>tv is tired</p>
 		</ul>
-		<p>tv is tired</p>
+		
 		<script type="text/javascript">
 			Zepto('li:first-child').add('p').css('background-color','red');
 			Zepto('li:nth-child(2)').after('<p>ttt</p>');
 			/*append在ul内部最后面添加*/
 			Zepto('ul').append('<li>new list item</li>');
 			Zepto('<li>da</li>').appendTo('ul')
+			//each(function(index,item){...})-->self 当遍历返回false时，遍历会停止
+			Zepto('li').each(function(index){
+				console.log('li %d is %o',index,this);
+			});//this指的是li(节点的html内容)
 			/* Zepto.js
 			 	$.each(['a','b','c'],function(index,item){
 				console.log('item %d is : %s',index,item);
 			})
 			*/
+			
 			/* JQuery
 			 * $(['a','b','c']).each(function(index,item){
 				console.log('item %d is : %s',index,item);
@@ -58,8 +64,26 @@
 			//$.trim(string)-->string 删除字符串开始和末尾的空白符，类似String.prototype.trim()
 			console.log(Zepto.trim("    j j k l "));//-->"j j k l"
 			//$.type(object)-->string 获取js对象的类型，可能类型有：null,undefined,string,boolean,number,function,date,array,regexp,object,error
+			//concat(nodes,[node2,...])-->self 把两个数组合并成一个数组，不改变原来数组
+			console.log("concat :"+[1,2,3].concat(2,['a','b','c']));//-->[1,2,3,2,'a','b','c']
 			
+			console.log("concat2 :"+[1,2].concat(2,[3,[5,7]]));//-->[1,2,2,'a','b','c']
+			console.log("concat3 :"+ [1,2,3].concat(4,[5,[6,7]]));//--->[1,2,3,4,5,6,7]);
+			//data(name,value) 用法和attr相似  获取dom节点上的data-*值，或修改值
+			console.log('data-*'+Zepto('li').data('role'));
+			//empty()-->self 从Zepto对象集合中移除所有dom子节点
+			/*Zepto('ul').empty('p');*/
+			console.log(Zepto('li').eq(0));
+			console.log(Zepto('li').eq(-1));
+			//filter(selector)-->collection
+			console.log([1,2,3].filter(function(num){
+				return num>2;
+			}));
+			//find
+			console.log(Zepto('ul').find('p'));
 			
+			/*事件*/
+			Zepto.Event('li:click',{bubble:false});
 		</script>
 	</body>
 </html>
