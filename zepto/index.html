@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8" />
 		<title></title>
-		<script type="text/javascript" src="js/zepto.js" ></script><!--
-		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>-->
+		<script type="text/javascript" src="js/zepto.js" ></script>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
 	</head>
 	<body>
 		<ul>
@@ -13,7 +13,8 @@
 			<li>list item 3</li>
 			<p>tv is tired</p>
 		</ul>
-		
+		<a id='test' href='javascript:;'>test链接噢</a>
+		<a id='test1' href='javascript:;'>test1链接噢</a>
 		<script type="text/javascript">
 			Zepto('li:first-child').add('p').css('background-color','red');
 			Zepto('li:nth-child(2)').after('<p>ttt</p>');
@@ -82,8 +83,35 @@
 			//find
 			console.log(Zepto('ul').find('p'));
 			
-			/*事件*/
-			Zepto.Event('li:click',{bubble:false});
+			/*事件$.Event()*/
+			console.log(Zepto.Event('li:click',{bubble:false}));
+			
+			//$.proxy(fn,context)-->function $.proxy(context,property)-->function
+			var obj={name:'Zepto'},
+				handler=function(){console.log('hello from'+this.name)}
+				$(document).on('click',$.proxy(handler,obj));
+			var obj1={name:'tv',test:function(){
+				console.log('proxy1 :'+this.name);
+				$('#test').unbind('click',obj1.test);
+			}};
+			$('#test').click(jQuery.proxy(obj1,'test'));
+			//bind(type,function(e){...})-->self bind({type:handler,type2:handler})-->self 为元素绑定一个处理事件
+			$('#test1').bind('hover',function(){
+				console.log('tv yeah');
+			});
+			//基于一组特定的根元素为所有选择器匹配的元素附件一个处理事件，匹配的元素可能现在货将来才创建
+			//delegate(selector,type,function(e){...})-->self 
+			//delegate(selector,{type:handler,type2:handler2,..})-->self
+			
+			//die(type,function(e){...})-->self die({type:handler,type2:handler2,...})-->self 删除通过live添加的事件
+			//live(type,function(e){..})-->self live({type:handler,type2:handler2,...})-->self 类似delegate,其中selector参数为当前zepto集合对象
+			//off(type,[selector],function(e){...})-->self off({type:handler,type2:handler2,...},[selector])-->self off(type,[selector])-->self off()-->self 移除通过on注册的事件(用bind或用on注册的事件)，如没有参数，将移除当前元素上所有的注册事件
+			//on
+			//one(type,funciton(e){...})-->self one({type:handler,type2:handler2,...})-->self 添加一个处理事件到元素，处理函数在每个元素上最多执行一次
+			//trigger(event,[data])
+			//triggerHandler(event,[data])--self
+			//unbind(type,function(e){...})-->self unbind({type:handler,type2:handler2,...})-->self 移除通多bind注册的事件
+			//undelegate(selector,type,function(e){...})-->self undelegate(selector,{type:handler,type2:handler2,...})-->self 移除通过delegate注册的事件
 		</script>
 	</body>
 </html>
