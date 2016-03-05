@@ -15,6 +15,10 @@
 		</ul>
 		<a id='test' href='javascript:;'>test链接噢</a>
 		<a id='test1' href='javascript:;'>test1链接噢</a>
+		<form>
+			<input name="tv" type="text"/>
+			<input name="tv1" type="text"/>
+		</form>
 		<script type="text/javascript">
 			Zepto('li:first-child').add('p').css('background-color','red');
 			Zepto('li:nth-child(2)').after('<p>ttt</p>');
@@ -85,7 +89,10 @@
 			
 			/*事件$.Event()*/
 			console.log(Zepto.Event('li:click',{bubble:false}));
-			
+			//one只执行一次事件
+			Zepto('#test').one('click',function(e){
+ 				alert('dddd');
+ 			});
 			//$.proxy(fn,context)-->function $.proxy(context,property)-->function
 			var obj={name:'Zepto'},
 				handler=function(){console.log('hello from'+this.name)}
@@ -112,6 +119,11 @@
 			//triggerHandler(event,[data])--self
 			//unbind(type,function(e){...})-->self unbind({type:handler,type2:handler2,...})-->self 移除通多bind注册的事件
 			//undelegate(selector,type,function(e){...})-->self undelegate(selector,{type:handler,type2:handler2,...})-->self 移除通过delegate注册的事件
+			
+			/*表单方法*/
+			//serialize()-->string 在ajax post请求中奖用作提交的表单元素的值编译成URL-encoded字符串 
+			//serializeArray()-->array 将用作提交的表单元素的值编译成拥有name和value对象组成的数组，不能使用的表单元素，button,未选中的radio button/checkboxs将会被跳过，结果不包含file inputs的数据
+			console.log(Zepto('form').serializeArray());
 		</script>
 	</body>
 </html>

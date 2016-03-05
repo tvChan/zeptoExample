@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/zepto-1.js" ></script>
+		<style>
+			.delete{display: none;}
+		</style>
+	</head>
+	<body>
+		<ul id="items">
+			<li>List item 1<span class="delete">DELETE</span></li>
+			<li>List item 2<span class="delete">DELETE</span></li>
+		</ul>
+		<ul id='anim'>
+			<li>tv</li>
+			<li>tv1</li>
+			<li>tv2</li>
+		</ul>
+		
+		<script>
+		/*要使用animate要把fx.js封装到zepto.js里去*/
+			/*$.fx.off(false);*/
+		/*	Zepto('#anim').animate(
+				{color:'#abcdef',
+				rotateZ:'45deg',
+				translate3d:'0,10px,0'}
+				,500,'ease-in-out'
+			);
+			*/
+			$('#item li').swipe(function(){
+				$('.delete').hide();
+				$('.delete',this).show();
+			});
+			$('.delete').tap(function(){
+				$(this).parent('li').remove();
+			});
+		</script>
+	</body>
+</html>

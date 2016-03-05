@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js" ></script>
+		<script type="text/javascript" src="js/zepto.js" ></script>
+	</head>
+	<body>
+		<form>
+			<input type="text" value="aaa" name="tv"/>
+			<input type="text" value="bbb" name="tv1"/>	
+		</form>
+		<script>
+		var jQeryArray=$('form').serializeArray(),
+			zeptoArray=Zepto('form').serializeArray();
+			console.log("jQuery :"+jQeryArray.name);
+			console.log("Zepto :"+zeptoArray[0]);
+		</script>
+	</body>
+</html>
